@@ -1,7 +1,7 @@
 import 'package:dart_mappable/dart_mappable.dart';
 import 'package:proxmox_client/src/hooks/hooks.dart';
 
-part 'create_domain.mapper.dart';
+part 'domain_config.mapper.dart';
 
 /// Realm type
 @MappableEnum()
@@ -76,9 +76,9 @@ enum Prompt {
 /// Equal to `pvesh create /access/domains
 /// {@endtemplate}
 @MappableClass(ignoreNull: true)
-class CreateDomain with CreateDomainMappable {
+class DomainConfig with DomainConfigMappable {
   /// {@macro create_domain}
-  CreateDomain({
+  DomainConfig({
     required this.realm,
     required this.type,
     this.acrValues,

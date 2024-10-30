@@ -23,7 +23,7 @@ class ProxmoxAccess {
   }
 
   /// Adds a new domain
-  Future<void> createDomain(CreateDomain domain) async {
+  Future<void> createDomain(DomainConfig domain) async {
     final url = _baseUrl.resolve('access/domains');
 
     await _client.post(url, body: domain.toMap());

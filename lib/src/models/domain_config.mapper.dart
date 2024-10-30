@@ -4,7 +4,7 @@
 // ignore_for_file: unused_element, unnecessary_cast, override_on_non_overriding_member
 // ignore_for_file: strict_raw_type, inference_failure_on_untyped_parameter
 
-part of 'create_domain.dart';
+part of 'domain_config.dart';
 
 class DomainTypeMapper extends EnumMapper<DomainType> {
   DomainTypeMapper._();
@@ -222,13 +222,13 @@ extension PromptMapperExtension on Prompt {
   }
 }
 
-class CreateDomainMapper extends ClassMapperBase<CreateDomain> {
-  CreateDomainMapper._();
+class DomainConfigMapper extends ClassMapperBase<DomainConfig> {
+  DomainConfigMapper._();
 
-  static CreateDomainMapper? _instance;
-  static CreateDomainMapper ensureInitialized() {
+  static DomainConfigMapper? _instance;
+  static DomainConfigMapper ensureInitialized() {
     if (_instance == null) {
-      MapperContainer.globals.use(_instance = CreateDomainMapper._());
+      MapperContainer.globals.use(_instance = DomainConfigMapper._());
       DomainTypeMapper.ensureInitialized();
       LdapModeMapper.ensureInitialized();
       PromptMapper.ensureInitialized();
@@ -238,134 +238,134 @@ class CreateDomainMapper extends ClassMapperBase<CreateDomain> {
   }
 
   @override
-  final String id = 'CreateDomain';
+  final String id = 'DomainConfig';
 
-  static String _$realm(CreateDomain v) => v.realm;
-  static const Field<CreateDomain, String> _f$realm = Field('realm', _$realm);
-  static DomainType _$type(CreateDomain v) => v.type;
-  static const Field<CreateDomain, DomainType> _f$type = Field('type', _$type);
-  static String? _$acrValues(CreateDomain v) => v.acrValues;
-  static const Field<CreateDomain, String> _f$acrValues = Field(
+  static String _$realm(DomainConfig v) => v.realm;
+  static const Field<DomainConfig, String> _f$realm = Field('realm', _$realm);
+  static DomainType _$type(DomainConfig v) => v.type;
+  static const Field<DomainConfig, DomainType> _f$type = Field('type', _$type);
+  static String? _$acrValues(DomainConfig v) => v.acrValues;
+  static const Field<DomainConfig, String> _f$acrValues = Field(
       'acrValues', _$acrValues,
       key: 'acr-values', opt: true, hook: AcrValuesHook());
-  static bool? _$autocreate(CreateDomain v) => v.autocreate;
-  static const Field<CreateDomain, bool> _f$autocreate =
+  static bool? _$autocreate(DomainConfig v) => v.autocreate;
+  static const Field<DomainConfig, bool> _f$autocreate =
       Field('autocreate', _$autocreate, opt: true, hook: ProxmoxBoolHook());
-  static String? _$baseDn(CreateDomain v) => v.baseDn;
-  static const Field<CreateDomain, String> _f$baseDn =
+  static String? _$baseDn(DomainConfig v) => v.baseDn;
+  static const Field<DomainConfig, String> _f$baseDn =
       Field('baseDn', _$baseDn, key: 'base_dn', opt: true);
-  static String? _$bindDn(CreateDomain v) => v.bindDn;
-  static const Field<CreateDomain, String> _f$bindDn =
+  static String? _$bindDn(DomainConfig v) => v.bindDn;
+  static const Field<DomainConfig, String> _f$bindDn =
       Field('bindDn', _$bindDn, key: 'bind_dn', opt: true);
-  static String? _$capath(CreateDomain v) => v.capath;
-  static const Field<CreateDomain, String> _f$capath =
+  static String? _$capath(DomainConfig v) => v.capath;
+  static const Field<DomainConfig, String> _f$capath =
       Field('capath', _$capath, opt: true);
-  static bool? _$isCaseSensitive(CreateDomain v) => v.isCaseSensitive;
-  static const Field<CreateDomain, bool> _f$isCaseSensitive = Field(
+  static bool? _$isCaseSensitive(DomainConfig v) => v.isCaseSensitive;
+  static const Field<DomainConfig, bool> _f$isCaseSensitive = Field(
       'isCaseSensitive', _$isCaseSensitive,
       key: 'case-sensitive', opt: true, hook: ProxmoxBoolHook());
-  static String? _$cert(CreateDomain v) => v.cert;
-  static const Field<CreateDomain, String> _f$cert =
+  static String? _$cert(DomainConfig v) => v.cert;
+  static const Field<DomainConfig, String> _f$cert =
       Field('cert', _$cert, opt: true);
-  static String? _$certKey(CreateDomain v) => v.certKey;
-  static const Field<CreateDomain, String> _f$certKey =
+  static String? _$certKey(DomainConfig v) => v.certKey;
+  static const Field<DomainConfig, String> _f$certKey =
       Field('certKey', _$certKey, opt: true);
-  static bool? _$checkConnection(CreateDomain v) => v.checkConnection;
-  static const Field<CreateDomain, bool> _f$checkConnection = Field(
+  static bool? _$checkConnection(DomainConfig v) => v.checkConnection;
+  static const Field<DomainConfig, bool> _f$checkConnection = Field(
       'checkConnection', _$checkConnection,
       key: 'check-connection', opt: true, hook: ProxmoxBoolHook());
-  static String? _$clientId(CreateDomain v) => v.clientId;
-  static const Field<CreateDomain, String> _f$clientId =
+  static String? _$clientId(DomainConfig v) => v.clientId;
+  static const Field<DomainConfig, String> _f$clientId =
       Field('clientId', _$clientId, key: 'client-id', opt: true);
-  static String? _$clientKey(CreateDomain v) => v.clientKey;
-  static const Field<CreateDomain, String> _f$clientKey =
+  static String? _$clientKey(DomainConfig v) => v.clientKey;
+  static const Field<DomainConfig, String> _f$clientKey =
       Field('clientKey', _$clientKey, key: 'client-key', opt: true);
-  static String? _$comment(CreateDomain v) => v.comment;
-  static const Field<CreateDomain, String> _f$comment =
+  static String? _$comment(DomainConfig v) => v.comment;
+  static const Field<DomainConfig, String> _f$comment =
       Field('comment', _$comment, opt: true);
-  static bool? _$isDefault(CreateDomain v) => v.isDefault;
-  static const Field<CreateDomain, bool> _f$isDefault = Field(
+  static bool? _$isDefault(DomainConfig v) => v.isDefault;
+  static const Field<DomainConfig, bool> _f$isDefault = Field(
       'isDefault', _$isDefault,
       key: 'default', opt: true, hook: ProxmoxBoolHook());
-  static String? _$domain(CreateDomain v) => v.domain;
-  static const Field<CreateDomain, String> _f$domain =
+  static String? _$domain(DomainConfig v) => v.domain;
+  static const Field<DomainConfig, String> _f$domain =
       Field('domain', _$domain, opt: true, hook: DomainHook());
-  static String? _$filter(CreateDomain v) => v.filter;
-  static const Field<CreateDomain, String> _f$filter =
+  static String? _$filter(DomainConfig v) => v.filter;
+  static const Field<DomainConfig, String> _f$filter =
       Field('filter', _$filter, opt: true);
-  static List<String>? _$groupClasses(CreateDomain v) => v.groupClasses;
-  static const Field<CreateDomain, List<String>> _f$groupClasses = Field(
+  static List<String>? _$groupClasses(DomainConfig v) => v.groupClasses;
+  static const Field<DomainConfig, List<String>> _f$groupClasses = Field(
       'groupClasses', _$groupClasses,
       key: 'group_classes', opt: true, hook: GroupClasses());
-  static String? _$groupDn(CreateDomain v) => v.groupDn;
-  static const Field<CreateDomain, String> _f$groupDn =
+  static String? _$groupDn(DomainConfig v) => v.groupDn;
+  static const Field<DomainConfig, String> _f$groupDn =
       Field('groupDn', _$groupDn, key: 'group_dn', opt: true);
-  static String? _$groupFilter(CreateDomain v) => v.groupFilter;
-  static const Field<CreateDomain, String> _f$groupFilter =
+  static String? _$groupFilter(DomainConfig v) => v.groupFilter;
+  static const Field<DomainConfig, String> _f$groupFilter =
       Field('groupFilter', _$groupFilter, key: 'groupd_filter', opt: true);
-  static String? _$groupNameAttribute(CreateDomain v) => v.groupNameAttribute;
-  static const Field<CreateDomain, String> _f$groupNameAttribute = Field(
+  static String? _$groupNameAttribute(DomainConfig v) => v.groupNameAttribute;
+  static const Field<DomainConfig, String> _f$groupNameAttribute = Field(
       'groupNameAttribute', _$groupNameAttribute,
       key: 'group_name_attr', opt: true);
-  static String? _$issuerUrl(CreateDomain v) => v.issuerUrl;
-  static const Field<CreateDomain, String> _f$issuerUrl =
+  static String? _$issuerUrl(DomainConfig v) => v.issuerUrl;
+  static const Field<DomainConfig, String> _f$issuerUrl =
       Field('issuerUrl', _$issuerUrl, key: 'issuer-url', opt: true);
-  static LdapMode _$mode(CreateDomain v) => v.mode;
-  static const Field<CreateDomain, LdapMode> _f$mode =
+  static LdapMode _$mode(DomainConfig v) => v.mode;
+  static const Field<DomainConfig, LdapMode> _f$mode =
       Field('mode', _$mode, opt: true, def: LdapMode.ldap);
-  static String? _$password(CreateDomain v) => v.password;
-  static const Field<CreateDomain, String> _f$password =
+  static String? _$password(DomainConfig v) => v.password;
+  static const Field<DomainConfig, String> _f$password =
       Field('password', _$password, opt: true);
-  static int? _$port(CreateDomain v) => v.port;
-  static const Field<CreateDomain, int> _f$port =
+  static int? _$port(DomainConfig v) => v.port;
+  static const Field<DomainConfig, int> _f$port =
       Field('port', _$port, opt: true);
-  static Prompt? _$prompt(CreateDomain v) => v.prompt;
-  static const Field<CreateDomain, Prompt> _f$prompt =
+  static Prompt? _$prompt(DomainConfig v) => v.prompt;
+  static const Field<DomainConfig, Prompt> _f$prompt =
       Field('prompt', _$prompt, opt: true);
-  static String _$scopes(CreateDomain v) => v.scopes;
-  static const Field<CreateDomain, String> _f$scopes =
+  static String _$scopes(DomainConfig v) => v.scopes;
+  static const Field<DomainConfig, String> _f$scopes =
       Field('scopes', _$scopes, opt: true, def: 'email profile');
-  static bool? _$isSecure(CreateDomain v) => v.isSecure;
-  static const Field<CreateDomain, bool> _f$isSecure = Field(
+  static bool? _$isSecure(DomainConfig v) => v.isSecure;
+  static const Field<DomainConfig, bool> _f$isSecure = Field(
       'isSecure', _$isSecure,
       key: 'secure', opt: true, hook: ProxmoxBoolHook());
-  static String? _$primaryServer(CreateDomain v) => v.primaryServer;
-  static const Field<CreateDomain, String> _f$primaryServer =
+  static String? _$primaryServer(DomainConfig v) => v.primaryServer;
+  static const Field<DomainConfig, String> _f$primaryServer =
       Field('primaryServer', _$primaryServer, key: 'server1', opt: true);
-  static String? _$fallbackServer(CreateDomain v) => v.fallbackServer;
-  static const Field<CreateDomain, String> _f$fallbackServer =
+  static String? _$fallbackServer(DomainConfig v) => v.fallbackServer;
+  static const Field<DomainConfig, String> _f$fallbackServer =
       Field('fallbackServer', _$fallbackServer, key: 'server2', opt: true);
-  static SslVersion? _$sslVersion(CreateDomain v) => v.sslVersion;
-  static const Field<CreateDomain, SslVersion> _f$sslVersion =
+  static SslVersion? _$sslVersion(DomainConfig v) => v.sslVersion;
+  static const Field<DomainConfig, SslVersion> _f$sslVersion =
       Field('sslVersion', _$sslVersion, key: 'sslversion', opt: true);
-  static SyncOptions? _$syncDefaultsOptions(CreateDomain v) =>
+  static SyncOptions? _$syncDefaultsOptions(DomainConfig v) =>
       v.syncDefaultsOptions;
-  static const Field<CreateDomain, SyncOptions> _f$syncDefaultsOptions = Field(
+  static const Field<DomainConfig, SyncOptions> _f$syncDefaultsOptions = Field(
       'syncDefaultsOptions', _$syncDefaultsOptions,
       key: 'sync-defaults-options', opt: true, hook: SyncDefaultsOptions());
-  static String? _$syncAttributes(CreateDomain v) => v.syncAttributes;
-  static const Field<CreateDomain, String> _f$syncAttributes = Field(
+  static String? _$syncAttributes(DomainConfig v) => v.syncAttributes;
+  static const Field<DomainConfig, String> _f$syncAttributes = Field(
       'syncAttributes', _$syncAttributes,
       key: 'sync_attributes', opt: true);
-  static String? _$tfa(CreateDomain v) => v.tfa;
-  static const Field<CreateDomain, String> _f$tfa =
+  static String? _$tfa(DomainConfig v) => v.tfa;
+  static const Field<DomainConfig, String> _f$tfa =
       Field('tfa', _$tfa, opt: true);
-  static String? _$userAttr(CreateDomain v) => v.userAttr;
-  static const Field<CreateDomain, String> _f$userAttr =
+  static String? _$userAttr(DomainConfig v) => v.userAttr;
+  static const Field<DomainConfig, String> _f$userAttr =
       Field('userAttr', _$userAttr, key: 'user_attr', opt: true);
-  static List<String>? _$userClasses(CreateDomain v) => v.userClasses;
-  static const Field<CreateDomain, List<String>> _f$userClasses =
+  static List<String>? _$userClasses(DomainConfig v) => v.userClasses;
+  static const Field<DomainConfig, List<String>> _f$userClasses =
       Field('userClasses', _$userClasses, key: 'user_classes', opt: true);
-  static String? _$usernameClaim(CreateDomain v) => v.usernameClaim;
-  static const Field<CreateDomain, String> _f$usernameClaim =
+  static String? _$usernameClaim(DomainConfig v) => v.usernameClaim;
+  static const Field<DomainConfig, String> _f$usernameClaim =
       Field('usernameClaim', _$usernameClaim, key: 'username-claim', opt: true);
-  static bool? _$shouldVerify(CreateDomain v) => v.shouldVerify;
-  static const Field<CreateDomain, bool> _f$shouldVerify = Field(
+  static bool? _$shouldVerify(DomainConfig v) => v.shouldVerify;
+  static const Field<DomainConfig, bool> _f$shouldVerify = Field(
       'shouldVerify', _$shouldVerify,
       key: 'verify', opt: true, hook: ProxmoxBoolHook());
 
   @override
-  final MappableFields<CreateDomain> fields = const {
+  final MappableFields<DomainConfig> fields = const {
     #realm: _f$realm,
     #type: _f$type,
     #acrValues: _f$acrValues,
@@ -408,8 +408,8 @@ class CreateDomainMapper extends ClassMapperBase<CreateDomain> {
   @override
   final bool ignoreNull = true;
 
-  static CreateDomain _instantiate(DecodingData data) {
-    return CreateDomain(
+  static DomainConfig _instantiate(DecodingData data) {
+    return DomainConfig(
         realm: data.dec(_f$realm),
         type: data.dec(_f$type),
         acrValues: data.dec(_f$acrValues),
@@ -453,54 +453,54 @@ class CreateDomainMapper extends ClassMapperBase<CreateDomain> {
   @override
   final Function instantiate = _instantiate;
 
-  static CreateDomain fromMap(Map<String, dynamic> map) {
-    return ensureInitialized().decodeMap<CreateDomain>(map);
+  static DomainConfig fromMap(Map<String, dynamic> map) {
+    return ensureInitialized().decodeMap<DomainConfig>(map);
   }
 
-  static CreateDomain fromJson(String json) {
-    return ensureInitialized().decodeJson<CreateDomain>(json);
+  static DomainConfig fromJson(String json) {
+    return ensureInitialized().decodeJson<DomainConfig>(json);
   }
 }
 
-mixin CreateDomainMappable {
+mixin DomainConfigMappable {
   String toJson() {
-    return CreateDomainMapper.ensureInitialized()
-        .encodeJson<CreateDomain>(this as CreateDomain);
+    return DomainConfigMapper.ensureInitialized()
+        .encodeJson<DomainConfig>(this as DomainConfig);
   }
 
   Map<String, dynamic> toMap() {
-    return CreateDomainMapper.ensureInitialized()
-        .encodeMap<CreateDomain>(this as CreateDomain);
+    return DomainConfigMapper.ensureInitialized()
+        .encodeMap<DomainConfig>(this as DomainConfig);
   }
 
-  CreateDomainCopyWith<CreateDomain, CreateDomain, CreateDomain> get copyWith =>
-      _CreateDomainCopyWithImpl(this as CreateDomain, $identity, $identity);
+  DomainConfigCopyWith<DomainConfig, DomainConfig, DomainConfig> get copyWith =>
+      _DomainConfigCopyWithImpl(this as DomainConfig, $identity, $identity);
   @override
   String toString() {
-    return CreateDomainMapper.ensureInitialized()
-        .stringifyValue(this as CreateDomain);
+    return DomainConfigMapper.ensureInitialized()
+        .stringifyValue(this as DomainConfig);
   }
 
   @override
   bool operator ==(Object other) {
-    return CreateDomainMapper.ensureInitialized()
-        .equalsValue(this as CreateDomain, other);
+    return DomainConfigMapper.ensureInitialized()
+        .equalsValue(this as DomainConfig, other);
   }
 
   @override
   int get hashCode {
-    return CreateDomainMapper.ensureInitialized()
-        .hashValue(this as CreateDomain);
+    return DomainConfigMapper.ensureInitialized()
+        .hashValue(this as DomainConfig);
   }
 }
 
-extension CreateDomainValueCopy<$R, $Out>
-    on ObjectCopyWith<$R, CreateDomain, $Out> {
-  CreateDomainCopyWith<$R, CreateDomain, $Out> get $asCreateDomain =>
-      $base.as((v, t, t2) => _CreateDomainCopyWithImpl(v, t, t2));
+extension DomainConfigValueCopy<$R, $Out>
+    on ObjectCopyWith<$R, DomainConfig, $Out> {
+  DomainConfigCopyWith<$R, DomainConfig, $Out> get $asDomainConfig =>
+      $base.as((v, t, t2) => _DomainConfigCopyWithImpl(v, t, t2));
 }
 
-abstract class CreateDomainCopyWith<$R, $In extends CreateDomain, $Out>
+abstract class DomainConfigCopyWith<$R, $In extends DomainConfig, $Out>
     implements ClassCopyWith<$R, $In, $Out> {
   ListCopyWith<$R, String, ObjectCopyWith<$R, String, String>>?
       get groupClasses;
@@ -544,17 +544,17 @@ abstract class CreateDomainCopyWith<$R, $In extends CreateDomain, $Out>
       List<String>? userClasses,
       String? usernameClaim,
       bool? shouldVerify});
-  CreateDomainCopyWith<$R2, $In, $Out2> $chain<$R2, $Out2>(Then<$Out2, $R2> t);
+  DomainConfigCopyWith<$R2, $In, $Out2> $chain<$R2, $Out2>(Then<$Out2, $R2> t);
 }
 
-class _CreateDomainCopyWithImpl<$R, $Out>
-    extends ClassCopyWithBase<$R, CreateDomain, $Out>
-    implements CreateDomainCopyWith<$R, CreateDomain, $Out> {
-  _CreateDomainCopyWithImpl(super.value, super.then, super.then2);
+class _DomainConfigCopyWithImpl<$R, $Out>
+    extends ClassCopyWithBase<$R, DomainConfig, $Out>
+    implements DomainConfigCopyWith<$R, DomainConfig, $Out> {
+  _DomainConfigCopyWithImpl(super.value, super.then, super.then2);
 
   @override
-  late final ClassMapperBase<CreateDomain> $mapper =
-      CreateDomainMapper.ensureInitialized();
+  late final ClassMapperBase<DomainConfig> $mapper =
+      DomainConfigMapper.ensureInitialized();
   @override
   ListCopyWith<$R, String, ObjectCopyWith<$R, String, String>>?
       get groupClasses => $value.groupClasses != null
@@ -654,7 +654,7 @@ class _CreateDomainCopyWithImpl<$R, $Out>
         if (shouldVerify != $none) #shouldVerify: shouldVerify
       }));
   @override
-  CreateDomain $make(CopyWithData data) => CreateDomain(
+  DomainConfig $make(CopyWithData data) => DomainConfig(
       realm: data.get(#realm, or: $value.realm),
       type: data.get(#type, or: $value.type),
       acrValues: data.get(#acrValues, or: $value.acrValues),
@@ -697,7 +697,7 @@ class _CreateDomainCopyWithImpl<$R, $Out>
       shouldVerify: data.get(#shouldVerify, or: $value.shouldVerify));
 
   @override
-  CreateDomainCopyWith<$R2, CreateDomain, $Out2> $chain<$R2, $Out2>(
+  DomainConfigCopyWith<$R2, DomainConfig, $Out2> $chain<$R2, $Out2>(
           Then<$Out2, $R2> t) =>
-      _CreateDomainCopyWithImpl($value, $cast, t);
+      _DomainConfigCopyWithImpl($value, $cast, t);
 }

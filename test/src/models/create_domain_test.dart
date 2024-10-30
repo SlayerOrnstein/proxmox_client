@@ -5,7 +5,7 @@ import 'package:test/test.dart';
 void main() {
   group('CreateDomain()', () {
     test('values are serialized properly', () {
-      final domain = CreateDomain(
+      final domain = DomainConfig(
         realm: 'hello',
         type: DomainType.ldap,
         domain: 'world',

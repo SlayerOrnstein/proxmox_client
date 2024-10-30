@@ -1,2 +1,2 @@
-export 'create_domain.dart';
+export 'domain_config.dart';
 export 'domain.dart';
