@@ -1,2 +1,3 @@
-export 'domain.dart';
-export 'domain_config.dart';
+export 'responses/domain.dart';
+export 'requests/domain_config.dart';
+export 'responses/group.dart';
