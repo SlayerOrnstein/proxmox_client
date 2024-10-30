@@ -80,7 +80,7 @@ class DomainConfig with DomainConfigMappable {
   /// {@macro create_domain}
   DomainConfig({
     required this.realm,
-    required this.type,
+    this.type,
     this.acrValues,
     this.autocreate,
     this.baseDn,
@@ -123,7 +123,7 @@ class DomainConfig with DomainConfigMappable {
   final String realm;
 
   /// Realm type
-  final DomainType type;
+  final DomainType? type;
 
   /// Specifies the Authentication Context Class Reference values that the
   /// Authorization Server is being requested to use for the Auth Request.
@@ -301,7 +301,8 @@ enum SyncOptionsRemoveVanished {
 /// {@template sync_options}
 /// The default options for behavior of synchronizations.
 /// {@endtemplate}
-class SyncOptions {
+@MappableClass()
+class SyncOptions with SyncOptionsMappable {
   /// {@macro sync_options}
   SyncOptions({
     this.scope,
@@ -309,15 +310,17 @@ class SyncOptions {
     @Deprecated('use removeVanished instead.') this.purge,
     @Deprecated('use removeVanished instead.') this.full,
     this.enableNew = true,
+    this.dryRun = false,
   });
 
   /// Enable newly synced users immediately
-  @MappableField(key: 'enable-new')
+  @MappableField(key: 'enable-new', hook: ProxmoxBoolHook())
   final bool? enableNew;
 
   /// Remove ACLs for users or groups which were removed from the config
   /// during a sync.
   @Deprecated('use removeVanished instead.')
+  @MappableField(hook: ProxmoxBoolHook())
   final bool? purge;
 
   /// If set, uses the LDAP Directory as source of truth, deleting users or
@@ -325,6 +328,7 @@ class SyncOptions {
   /// properties of synced users. If not set, only syncs information which is
   /// present in the synced data, and does not delete or modify anything else
   @Deprecated('use removeVanished instead.')
+  @MappableField(hook: ProxmoxBoolHook())
   final bool? full;
 
   /// Remove Vanished (remove-vanished): This is a list of options which, when
@@ -347,4 +351,8 @@ class SyncOptions {
 
   /// The scope of what to sync. It can be either users, groups or both.
   final SyncOptionsScope? scope;
+
+  /// If set, does not write anything.
+  @MappableField(hook: ProxmoxBoolHook())
+  final bool dryRun;
 }

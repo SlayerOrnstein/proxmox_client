@@ -1,4 +1,4 @@
-export 'endpoints/access.dart';
+export 'endpoints/access/access.dart';
 export 'endpoints/cluster.dart';
 export 'endpoints/nodes.dart';
 export 'endpoints/pools.dart';
