@@ -8,11 +8,11 @@ import 'package:proxmox_client/src/utils/utils.dart';
 class ProxmoxClient {
   /// {@macro proxmox_client}
   ProxmoxClient({
-    required PveApiToken token,
+    required ProxmoxToken token,
     required String host,
     int port = 8006,
     Client? client,
-  })  : baseUrl = Uri.https('$host:$port/api2/json'),
+  })  : baseUrl = Uri.parse('https://$host:$port/api2/json'),
         _client = ProxmoxHttpClient(token: token, client: client);
 
   /// Base url that all endpoints call to
