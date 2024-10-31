@@ -8,8 +8,7 @@ typedef JsonObject = Map<String, dynamic>;
 
 /// Decode a json into a [JsonArray]
 JsonArray decodeJsonArray(String data) {
-  return List<Map<String, dynamic>>.from(jsonDecode(data) as List<dynamic>)
-      .toList();
+  return List<Map<String, dynamic>>.from(jsonDecode(data) as List<dynamic>);
 }
 
 /// Decode a json object into a [JsonObject]
