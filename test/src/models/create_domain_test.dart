@@ -19,6 +19,9 @@ void main() {
             SyncOptionsRemoveVanished.properties,
           ],
         ),
+        mode: LdapMode.ldap,
+        port: 3000,
+        primaryServer: '0.0.0.0',
       ).toMap();
 
       final prompt = domain['prompt'] as String;
