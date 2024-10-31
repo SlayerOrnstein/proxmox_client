@@ -22,7 +22,7 @@ class ProxmoxDomains extends ProxmoxEndpoint {
 
   /// Adds a new domain
   Future<void> createDomain(DomainConfig domain) async {
-    final response = await client.post(endpoint, body: domain.toMap());
+    final response = await client.post(endpoint, body: domain.toJson());
     print(response.body);
   }
 

@@ -80,7 +80,11 @@ class DomainConfig with DomainConfigMappable {
   /// {@macro create_domain}
   DomainConfig({
     required this.realm,
-    this.type,
+    required this.type,
+    required this.domain,
+    required this.mode,
+    required this.port,
+    required this.primaryServer,
     this.acrValues,
     this.autocreate,
     this.baseDn,
@@ -94,20 +98,16 @@ class DomainConfig with DomainConfigMappable {
     this.clientKey,
     this.comment,
     this.isDefault,
-    this.domain,
     this.filter,
     this.groupClasses,
     this.groupDn,
     this.groupFilter,
     this.groupNameAttribute,
     this.issuerUrl,
-    this.mode = LdapMode.ldap,
     this.password,
-    this.port,
     this.prompt,
     this.scopes = 'email profile',
     @Deprecated('use mode instead') this.isSecure,
-    this.primaryServer,
     this.fallbackServer,
     this.sslVersion,
     this.syncDefaultsOptions,
@@ -123,7 +123,7 @@ class DomainConfig with DomainConfigMappable {
   final String realm;
 
   /// Realm type
-  final DomainType? type;
+  final DomainType type;
 
   /// Specifies the Authentication Context Class Reference values that the
   /// Authorization Server is being requested to use for the Auth Request.
@@ -181,7 +181,7 @@ class DomainConfig with DomainConfigMappable {
 
   /// AP domain name
   @MappableField(hook: DomainHook())
-  final String? domain;
+  final String domain;
 
   /// LDAP filter for user sync
   final String? filter;
@@ -215,7 +215,7 @@ class DomainConfig with DomainConfigMappable {
   final String? password;
 
   /// Server port.
-  final int? port;
+  final int port;
 
   /// Specifies whether the Authorization Server prompts the End-User for
   /// reauthentication and consent.
@@ -232,7 +232,7 @@ class DomainConfig with DomainConfigMappable {
 
   /// Server IP address (or DNS name)
   @MappableField(key: 'server1')
-  final String? primaryServer;
+  final String primaryServer;
 
   /// Fallback Server IP address (or DNS name)
   @MappableField(key: 'server2')
