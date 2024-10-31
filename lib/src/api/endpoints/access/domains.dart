@@ -10,19 +10,20 @@ class ProxmoxDomains extends ProxmoxEndpoint {
   ProxmoxDomains({required super.baseUrl, required super.client});
 
   @override
-  Uri get endpoint => baseUrl.resolve('domains');
+  Uri get endpoint => Uri.parse('$baseUrl/domains');
 
   /// Fetch a list of configured domains
   Future<List<Domain>> fetchDomains() async {
     final json = decodeJsonObject((await client.get(endpoint)).body);
-    final data = json['data'] as JsonArray;
+    final data = List<Map<String, dynamic>>.from(json['data'] as List<dynamic>);
 
     return data.map(Domain.fromMap).toList();
   }
 
   /// Adds a new domain
   Future<void> createDomain(DomainConfig domain) async {
-    await client.post(endpoint, body: domain.toMap());
+    final response = await client.post(endpoint, body: domain.toMap());
+    print(response.body);
   }
 
   /// Update an auth server's settings

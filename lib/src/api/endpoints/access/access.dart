@@ -9,7 +9,7 @@ class ProxmoxAccess extends ProxmoxEndpoint {
   ProxmoxAccess({required super.baseUrl, required super.client});
 
   @override
-  Uri get endpoint => baseUrl.resolve('access');
+  Uri get endpoint => Uri.parse('$baseUrl/access');
 
   /// Domain endpoint for access
   ProxmoxDomains get domains =>
