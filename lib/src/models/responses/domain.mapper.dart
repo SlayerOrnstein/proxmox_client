@@ -24,10 +24,11 @@ class DomainMapper extends ClassMapperBase<Domain> {
   static const Field<Domain, String> _f$realm = Field('realm', _$realm);
   static String _$type(Domain v) => v.type;
   static const Field<Domain, String> _f$type = Field('type', _$type);
-  static String _$comment(Domain v) => v.comment;
-  static const Field<Domain, String> _f$comment = Field('comment', _$comment);
+  static String? _$comment(Domain v) => v.comment;
+  static const Field<Domain, String> _f$comment =
+      Field('comment', _$comment, opt: true);
   static Tfa? _$tfa(Domain v) => v.tfa;
-  static const Field<Domain, Tfa> _f$tfa = Field('tfa', _$tfa);
+  static const Field<Domain, Tfa> _f$tfa = Field('tfa', _$tfa, opt: true);
 
   @override
   final MappableFields<Domain> fields = const {
@@ -105,12 +106,12 @@ class _DomainCopyWithImpl<$R, $Out> extends ClassCopyWithBase<$R, Domain, $Out>
   $R call(
           {String? realm,
           String? type,
-          String? comment,
+          Object? comment = $none,
           Object? tfa = $none}) =>
       $apply(FieldCopyWithData({
         if (realm != null) #realm: realm,
         if (type != null) #type: type,
-        if (comment != null) #comment: comment,
+        if (comment != $none) #comment: comment,
         if (tfa != $none) #tfa: tfa
       }));
   @override

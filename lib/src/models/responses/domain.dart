@@ -20,8 +20,8 @@ class Domain with DomainMappable {
   Domain({
     required this.realm,
     required this.type,
-    required this.comment,
-    required this.tfa,
+    this.comment,
+    this.tfa,
   });
 
   /// Create a [Domain] from JSON
@@ -41,7 +41,7 @@ class Domain with DomainMappable {
   final String type;
 
   /// A comment
-  final String comment;
+  final String? comment;
 
   /// Two-factor authentication provider
   final Tfa? tfa;
