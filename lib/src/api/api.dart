@@ -1,6 +1,2 @@
-export 'endpoints/access/access.dart';
-export 'endpoints/cluster.dart';
-export 'endpoints/nodes.dart';
-export 'endpoints/pools.dart';
-export 'endpoints/storage.dart';
+export 'endpoints/endpoints.dart';
 export 'proxmox_client.dart';
