@@ -208,9 +208,9 @@ class OpenId extends RealmConfig with OpenIdMappable {
     required super.realm,
     required this.issuerUrl,
     required this.clientId,
-    required this.clientKey,
     super.comment,
     super.isDefault,
+    this.clientKey,
     this.scopes = 'email profile',
     this.autocreate = false,
     this.usernameClaim,
@@ -228,7 +228,7 @@ class OpenId extends RealmConfig with OpenIdMappable {
 
   /// OpenID Client ket
   @MappableField(key: 'client-key')
-  final String clientKey;
+  final String? clientKey;
 
   /// Automatically create users if they do not exist.
   @MappableField(hook: ProxmoxBoolHook())

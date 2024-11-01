@@ -1,6 +1,7 @@
 import 'package:proxmox_client/src/api/endpoints/endpoint.dart';
 import 'package:proxmox_client/src/models/models.dart';
 import 'package:proxmox_client/src/utils/utils.dart';
+import 'package:collection/collection.dart';
 
 /// {@template access}
 /// Functions to interact with the access/domains endpoint of proxmox
@@ -21,13 +22,31 @@ class ProxmoxDomains extends ProxmoxEndpoint {
   }
 
   /// Adds a new domain
-  Future<void> createDomain(DomainConfig domain) async {
-    final response = await client.post(endpoint, body: domain.toJson());
-    print(response.body);
+  Future<void> createDomain(RealmConfig domain) async {
+    final domains = await fetchDomains();
+    if (domains.firstWhereOrNull((d) => d.realm == domain.realm) != null) {
+      throw Exception('Realm with name already exist');
+    }
+
+    final payload = domain.toMap()..removeWhere((k, v) => v == null);
+    for (final key in payload.keys) {
+      if (payload[key] is String) continue;
+
+      payload[key] = payload[key].toString();
+    }
+
+    // Realm type doesn't get added in the toMap() so add it here
+    payload['type'] = domain.type.name;
+
+    final response = await client.post(endpoint, body: payload);
+    if (response.statusCode != 200) {
+      // TODO(Orn): need a better exception
+      throw Exception('Error adding realm');
+    }
   }
 
   /// Update an auth server's settings
-  Future<void> updateDomain(DomainConfig domain) async {
+  Future<void> updateDomain(RealmConfig domain) async {
     final url = endpoint.resolve(domain.realm);
 
     await client.put(url, body: domain.toMap());

@@ -705,9 +705,6 @@ class OpenIdMapper extends ClassMapperBase<OpenId> {
   static String _$clientId(OpenId v) => v.clientId;
   static const Field<OpenId, String> _f$clientId =
       Field('clientId', _$clientId, key: 'client-id');
-  static String _$clientKey(OpenId v) => v.clientKey;
-  static const Field<OpenId, String> _f$clientKey =
-      Field('clientKey', _$clientKey, key: 'client-key');
   static String? _$comment(OpenId v) => v.comment;
   static const Field<OpenId, String> _f$comment =
       Field('comment', _$comment, opt: true);
@@ -715,6 +712,9 @@ class OpenIdMapper extends ClassMapperBase<OpenId> {
   static const Field<OpenId, bool> _f$isDefault = Field(
       'isDefault', _$isDefault,
       key: 'default', opt: true, hook: ProxmoxBoolHook());
+  static String? _$clientKey(OpenId v) => v.clientKey;
+  static const Field<OpenId, String> _f$clientKey =
+      Field('clientKey', _$clientKey, key: 'client-key', opt: true);
   static String _$scopes(OpenId v) => v.scopes;
   static const Field<OpenId, String> _f$scopes =
       Field('scopes', _$scopes, opt: true, def: 'email profile');
@@ -738,9 +738,9 @@ class OpenIdMapper extends ClassMapperBase<OpenId> {
     #realm: _f$realm,
     #issuerUrl: _f$issuerUrl,
     #clientId: _f$clientId,
-    #clientKey: _f$clientKey,
     #comment: _f$comment,
     #isDefault: _f$isDefault,
+    #clientKey: _f$clientKey,
     #scopes: _f$scopes,
     #autocreate: _f$autocreate,
     #usernameClaim: _f$usernameClaim,
@@ -753,9 +753,9 @@ class OpenIdMapper extends ClassMapperBase<OpenId> {
         realm: data.dec(_f$realm),
         issuerUrl: data.dec(_f$issuerUrl),
         clientId: data.dec(_f$clientId),
-        clientKey: data.dec(_f$clientKey),
         comment: data.dec(_f$comment),
         isDefault: data.dec(_f$isDefault),
+        clientKey: data.dec(_f$clientKey),
         scopes: data.dec(_f$scopes),
         autocreate: data.dec(_f$autocreate),
         usernameClaim: data.dec(_f$usernameClaim),
@@ -813,9 +813,9 @@ abstract class OpenIdCopyWith<$R, $In extends OpenId, $Out>
       {String? realm,
       String? issuerUrl,
       String? clientId,
-      String? clientKey,
       String? comment,
       bool? isDefault,
+      String? clientKey,
       String? scopes,
       bool? autocreate,
       String? usernameClaim,
@@ -835,9 +835,9 @@ class _OpenIdCopyWithImpl<$R, $Out> extends ClassCopyWithBase<$R, OpenId, $Out>
           {String? realm,
           String? issuerUrl,
           String? clientId,
-          String? clientKey,
           Object? comment = $none,
           Object? isDefault = $none,
+          Object? clientKey = $none,
           String? scopes,
           bool? autocreate,
           Object? usernameClaim = $none,
@@ -847,9 +847,9 @@ class _OpenIdCopyWithImpl<$R, $Out> extends ClassCopyWithBase<$R, OpenId, $Out>
         if (realm != null) #realm: realm,
         if (issuerUrl != null) #issuerUrl: issuerUrl,
         if (clientId != null) #clientId: clientId,
-        if (clientKey != null) #clientKey: clientKey,
         if (comment != $none) #comment: comment,
         if (isDefault != $none) #isDefault: isDefault,
+        if (clientKey != $none) #clientKey: clientKey,
         if (scopes != null) #scopes: scopes,
         if (autocreate != null) #autocreate: autocreate,
         if (usernameClaim != $none) #usernameClaim: usernameClaim,
@@ -861,9 +861,9 @@ class _OpenIdCopyWithImpl<$R, $Out> extends ClassCopyWithBase<$R, OpenId, $Out>
       realm: data.get(#realm, or: $value.realm),
       issuerUrl: data.get(#issuerUrl, or: $value.issuerUrl),
       clientId: data.get(#clientId, or: $value.clientId),
-      clientKey: data.get(#clientKey, or: $value.clientKey),
       comment: data.get(#comment, or: $value.comment),
       isDefault: data.get(#isDefault, or: $value.isDefault),
+      clientKey: data.get(#clientKey, or: $value.clientKey),
       scopes: data.get(#scopes, or: $value.scopes),
       autocreate: data.get(#autocreate, or: $value.autocreate),
       usernameClaim: data.get(#usernameClaim, or: $value.usernameClaim),
