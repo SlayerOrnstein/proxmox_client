@@ -40,6 +40,7 @@ class ProxmoxGroup extends ProxmoxEndpoint {
     );
   }
 
+  /// Removes a group
   Future<void> removeGroup(String id) async {
     await client.delete(endpoint.resolve(id));
   }

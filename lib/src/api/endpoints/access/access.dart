@@ -13,10 +13,12 @@ class ProxmoxAccess extends ProxmoxEndpoint {
   @override
   Uri get endpoint => Uri.parse('$baseUrl/access');
 
-  /// Domain endpoint for access
+  /// Domain endpoint
   ProxmoxRealms get realms => ProxmoxRealms(baseUrl: endpoint, client: client);
 
+  /// Group endpoint
   ProxmoxGroup get groups => ProxmoxGroup(baseUrl: endpoint, client: client);
 
+  /// OpenID endpoint
   ProxmoxOpenId get openId => ProxmoxOpenId(baseUrl: endpoint, client: client);
 }

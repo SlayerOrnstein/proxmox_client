@@ -1,7 +1,7 @@
+import 'package:collection/collection.dart';
 import 'package:proxmox_client/src/api/endpoints/endpoint.dart';
 import 'package:proxmox_client/src/models/models.dart';
 import 'package:proxmox_client/src/utils/utils.dart';
-import 'package:collection/collection.dart';
 
 /// {@template access}
 /// Functions to interact with the access/domains endpoint of proxmox
@@ -34,7 +34,8 @@ class ProxmoxRealms extends ProxmoxEndpoint {
 
     final response = await client.post(endpoint, body: body);
     if (response.statusCode != 200) {
-      throw Exception('Failed to create realm (${response.statusCode}): ${response.reasonPhrase ?? 'Unknown error'}');
+      throw Exception('Failed to create realm (${response.statusCode}): '
+          '${response.reasonPhrase ?? 'Unknown error'}');
     }
   }
 

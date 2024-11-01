@@ -37,7 +37,11 @@ enum LdapMode {
   ldapStarTTls;
 }
 
+/// {@template realm_config}
+/// Base class for all realm configs
+/// {@endtemplate}
 abstract class RealmConfig {
+  /// {@macro realm_config}
   RealmConfig({required this.realm, this.comment, this.isDefault});
 
   /// Authentication domain ID
@@ -79,7 +83,11 @@ enum SslVersion {
   tlsv1_3,
 }
 
+/// {@template ldap_based_config}
+/// Base class for all LDAP based realm configs
+/// {@endtemplate}
 abstract class LdapBased extends RealmConfig {
+  /// {@macro ldap_based_config}
   LdapBased({
     required super.realm,
     required this.primaryServer,
@@ -129,8 +137,12 @@ abstract class LdapBased extends RealmConfig {
   final SslVersion? sslVersion;
 }
 
+/// {@template ad_config}
+/// Microsoft Active Directory realm config
+/// {@endtemplate}
 @MappableClass()
 class ADRealm extends LdapBased with ADRealmMappable {
+  /// {@macro ad_config}
   ADRealm({
     required super.realm,
     required super.primaryServer,
@@ -154,8 +166,12 @@ class ADRealm extends LdapBased with ADRealmMappable {
   RealmType get type => RealmType.ad;
 }
 
+/// {@template ad_config}
+/// LDAP realm config
+/// {@endtemplate}
 @MappableClass()
 class LdapRealm extends LdapBased with LdapRealmMappable {
+  /// {@macro ldap_config}
   LdapRealm({
     required super.realm,
     required super.primaryServer,
@@ -202,8 +218,12 @@ enum Prompt {
   selectAccount
 }
 
+/// {@template openid_config}
+/// OpenID realm config
+/// {@endtemplate}
 @MappableClass()
 class OpenId extends RealmConfig with OpenIdMappable {
+  /// {@macro open_config}
   OpenId({
     required super.realm,
     required this.issuerUrl,
