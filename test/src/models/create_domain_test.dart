@@ -5,12 +5,9 @@ import 'package:test/test.dart';
 void main() {
   group('CreateDomain()', () {
     test('values are serialized properly', () {
-      final domain = DomainConfig(
+      final domain = ADRealm(
         realm: 'hello',
-        type: DomainType.ldap,
         domain: 'world',
-        acrValues: 'PVEAdmin',
-        prompt: Prompt.selectAccount,
         syncDefaultsOptions: SyncOptions(
           enableNew: false,
           removeVanished: [
@@ -24,11 +21,19 @@ void main() {
         primaryServer: '0.0.0.0',
       ).toMap();
 
-      final prompt = domain['prompt'] as String;
-      expect(ProxmoxRegex.prompt.hasMatch(prompt), true);
-
       final options = domain['sync-defaults-options'] as String;
       expect(ProxmoxRegex.syncDefaultsOptions.hasMatch(options), true);
+
+      final openId = OpenId(
+        realm: 'hello-world',
+        issuerUrl: 'issuer',
+        clientId: 'id',
+        acrValues: 'PVEAdmin',
+        prompt: Prompt.selectAccount,
+      ).toMap();
+
+      final prompt = openId['prompt'] as String;
+      expect(ProxmoxRegex.prompt.hasMatch(prompt), true);
     });
   });
 }

@@ -34,8 +34,7 @@ class ProxmoxRealms extends ProxmoxEndpoint {
 
     final response = await client.post(endpoint, body: body);
     if (response.statusCode != 200) {
-      // TODO(Orn): need a better exception
-      throw Exception('Error adding realm');
+      throw Exception('Failed to create realm (${response.statusCode}): ${response.reasonPhrase ?? 'Unknown error'}');
     }
   }
 
@@ -60,7 +59,7 @@ class ProxmoxRealms extends ProxmoxEndpoint {
   /// NOTE: Synced groups will have the name 'name-$realm', so make sure those
   /// groups do not exist to prevent overwriting.
   Future<void> syncRealm(String realm, SyncOptions options) async {
-    final url = endpoint.resolve('$realm/sync');
+    final url = endpoint.resolve('/$realm/sync');
 
     await client.post(url, body: {'realm': realm, ...options.toMap()});
   }
