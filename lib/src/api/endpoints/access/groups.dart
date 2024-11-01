@@ -34,10 +34,14 @@ class ProxmoxGroup extends ProxmoxEndpoint {
 
   /// Updates an exisiting group
   Future<void> updateGroup(String id, [String? comment]) async {
-    await client.post(
-      endpoint,
-      body: {if (comment != null) 'comment': comment},
+    await client.put(
+      endpoint.resolve(id),
+      body: {'groupid': id, if (comment != null) 'comment': comment},
     );
+  }
+
+  Future<void> removeGroup(String id) async {
+    await client.delete(endpoint.resolve(id));
   }
 
   @override
