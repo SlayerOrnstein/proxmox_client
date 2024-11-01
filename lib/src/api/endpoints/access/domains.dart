@@ -6,15 +6,15 @@ import 'package:collection/collection.dart';
 /// {@template access}
 /// Functions to interact with the access/domains endpoint of proxmox
 /// {@endtemplate}
-class ProxmoxDomains extends ProxmoxEndpoint {
+class ProxmoxRealms extends ProxmoxEndpoint {
   /// {@macro access}
-  ProxmoxDomains({required super.baseUrl, required super.client});
+  ProxmoxRealms({required super.baseUrl, required super.client});
 
   @override
   Uri get endpoint => Uri.parse('$baseUrl/domains');
 
   /// Fetch a list of configured domains
-  Future<List<Domain>> fetchDomains() async {
+  Future<List<Domain>> fetchRealms() async {
     final json = decodeJsonObject((await client.get(endpoint)).body);
     final data = List<Map<String, dynamic>>.from(json['data'] as List<dynamic>);
 
@@ -22,8 +22,8 @@ class ProxmoxDomains extends ProxmoxEndpoint {
   }
 
   /// Adds a new domain
-  Future<void> createDomain(RealmConfig domain) async {
-    final domains = await fetchDomains();
+  Future<void> createRealm(RealmConfig domain) async {
+    final domains = await fetchRealms();
     if (domains.firstWhereOrNull((d) => d.realm == domain.realm) != null) {
       throw Exception('Realm with name already exist');
     }
@@ -46,14 +46,14 @@ class ProxmoxDomains extends ProxmoxEndpoint {
   }
 
   /// Update an auth server's settings
-  Future<void> updateDomain(RealmConfig domain) async {
+  Future<void> updateRealm(RealmConfig domain) async {
     final url = endpoint.resolve(domain.realm);
 
     await client.put(url, body: domain.toMap());
   }
 
   /// Delete and authentication server
-  Future<void> deleteDomain(String realm) async {
+  Future<void> removeRealm(String realm) async {
     await client.delete(endpoint.resolve(realm));
   }
 
@@ -61,7 +61,7 @@ class ProxmoxDomains extends ProxmoxEndpoint {
   ///
   /// NOTE: Synced groups will have the name 'name-$realm', so make sure those
   /// groups do not exist to prevent overwriting.
-  Future<void> syncDomain(String realm, SyncOptions options) async {
+  Future<void> syncRealm(String realm, SyncOptions options) async {
     final url = endpoint.resolve('$realm/sync');
 
     await client.post(url, body: {'realm': realm, ...options.toMap()});

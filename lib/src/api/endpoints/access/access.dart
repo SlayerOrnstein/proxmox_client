@@ -12,6 +12,5 @@ class ProxmoxAccess extends ProxmoxEndpoint {
   Uri get endpoint => Uri.parse('$baseUrl/access');
 
   /// Domain endpoint for access
-  ProxmoxDomains get domains =>
-      ProxmoxDomains(baseUrl: endpoint, client: client);
+  ProxmoxRealms get realms => ProxmoxRealms(baseUrl: endpoint, client: client);
 }
