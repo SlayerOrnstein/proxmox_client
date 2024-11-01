@@ -28,17 +28,11 @@ class ProxmoxRealms extends ProxmoxEndpoint {
       throw Exception('Realm with name already exist');
     }
 
-    final payload = domain.toMap()..removeWhere((k, v) => v == null);
-    for (final key in payload.keys) {
-      if (payload[key] is String) continue;
-
-      payload[key] = payload[key].toString();
-    }
-
+    final body = toFormUrl(domain.toMap());
     // Realm type doesn't get added in the toMap() so add it here
-    payload['type'] = domain.type.name;
+    body['type'] = domain.type.name;
 
-    final response = await client.post(endpoint, body: payload);
+    final response = await client.post(endpoint, body: body);
     if (response.statusCode != 200) {
       // TODO(Orn): need a better exception
       throw Exception('Error adding realm');
@@ -49,7 +43,11 @@ class ProxmoxRealms extends ProxmoxEndpoint {
   Future<void> updateRealm(RealmConfig domain) async {
     final url = endpoint.resolve(domain.realm);
 
-    await client.put(url, body: domain.toMap());
+    final body = toFormUrl(domain.toMap());
+    // Realm type doesn't get added in the toMap() so add it here
+    body['type'] = domain.type.name;
+
+    await client.put(url, body: body);
   }
 
   /// Delete and authentication server
