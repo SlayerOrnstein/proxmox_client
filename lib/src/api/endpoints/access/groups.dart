@@ -45,5 +45,5 @@ class ProxmoxGroup extends ProxmoxEndpoint {
   }
 
   @override
-  Uri get endpoint => baseUrl.resolve('groups');
+  Uri get endpoint => baseUrl.resolve('groups/');
 }
