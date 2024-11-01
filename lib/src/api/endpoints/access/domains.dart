@@ -34,7 +34,7 @@ class ProxmoxRealms extends ProxmoxEndpoint {
 
     final response = await client.post(endpoint, body: body);
     if (response.statusCode != 200) {
-      throw Exception(response.reasonPhrase);
+      throw Exception('Failed to create realm (${response.statusCode}): ${response.reasonPhrase ?? 'Unknown error'}');
     }
   }
 
