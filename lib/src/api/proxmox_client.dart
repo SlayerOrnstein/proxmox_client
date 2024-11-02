@@ -1,3 +1,5 @@
+import 'dart:io';
+
 import 'package:http/http.dart';
 import 'package:proxmox_client/src/api/api.dart';
 import 'package:proxmox_client/src/utils/utils.dart';
@@ -9,7 +11,7 @@ class ProxmoxClient {
   /// {@macro proxmox_client}
   ProxmoxClient({
     required ProxmoxToken token,
-    required String host,
+    required InternetAddress host,
     int port = 8006,
     Client? client,
   })  : baseUrl = Uri.parse('https://$host:$port/api2/json'),
