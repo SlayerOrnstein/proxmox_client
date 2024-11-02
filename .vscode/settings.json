@@ -1,5 +1,5 @@
 {
-    "notebook.codeActionsOnSave": {
+    "editor.codeActionsOnSave": {
         "source.organizeImports": "explicit"
     }
 }
