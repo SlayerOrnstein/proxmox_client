@@ -15,7 +15,8 @@ class ProxmoxAccess extends ProxmoxEndpoint {
   Uri get endpoint => baseUrl.addPath('access');
 
   /// Domain endpoint
-  ProxmoxRealms get realms => ProxmoxRealms(baseUrl: endpoint, client: client);
+  ProxmoxDomains get realms =>
+      ProxmoxDomains(baseUrl: endpoint, client: client);
 
   /// Group endpoint
   ProxmoxGroup get groups => ProxmoxGroup(baseUrl: endpoint, client: client);

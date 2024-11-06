@@ -68,4 +68,47 @@ void main() {
       );
     });
   });
+
+  group('Groups', () {
+    test('fetchGroups() => List of groups', () async {
+      final groups = await proxmoxClient.access.groups.fetchGroups();
+
+      expect(groups, isList);
+    });
+
+    test('createGroup() => New group', () async {
+      await proxmoxClient.access.groups
+          .createGroup('test-group', comment: 'test group');
+
+      final group = await proxmoxClient.access.groups.fetchGroup('test-group');
+
+      expect(group, isNotNull);
+      expect(group!.comment, 'test group');
+    });
+
+    test('fetchGroup() => get existing group', () async {
+      final group = await proxmoxClient.access.groups.fetchGroup('test-group');
+
+      expect(group, isNotNull);
+      expect(group!.comment, 'test group');
+    });
+
+    test('updateGroup() => update an existing group', () async {
+      await proxmoxClient.access.groups
+          .updateGroup('test-group', comment: 'edit');
+
+      final group = await proxmoxClient.access.groups.fetchGroup('test-group');
+
+      expect(group, isNotNull);
+      expect(group!.comment, 'edit');
+    });
+
+    test('removeGroup() => delete group', () async {
+      await proxmoxClient.access.groups.removeGroup('test-group');
+
+      final group = await proxmoxClient.access.groups.fetchGroup('test-group');
+
+      expect(group, isNull);
+    });
+  });
 }

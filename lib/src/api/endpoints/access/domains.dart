@@ -6,9 +6,9 @@ import 'package:proxmox_client/src/utils/utils.dart';
 /// {@template access}
 /// Functions to interact with the access/domains endpoint of proxmox
 /// {@endtemplate}
-class ProxmoxRealms extends ProxmoxEndpoint {
+class ProxmoxDomains extends ProxmoxEndpoint {
   /// {@macro access}
-  ProxmoxRealms({required super.baseUrl, required super.client});
+  ProxmoxDomains({required super.baseUrl, required super.client});
 
   @override
   Uri get endpoint => baseUrl.addPath('domains');
