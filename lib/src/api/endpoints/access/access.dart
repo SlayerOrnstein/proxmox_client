@@ -22,5 +22,8 @@ class ProxmoxAccess extends ProxmoxEndpoint {
   ProxmoxGroup get groups => ProxmoxGroup(baseUrl: endpoint, client: client);
 
   /// OpenID endpoint
+  ///
+  /// NOTE: untested
+  // TODO(Ornstein): need to setup an OpenID and TFA so I can test this out more
   ProxmoxOpenId get openId => ProxmoxOpenId(baseUrl: endpoint, client: client);
 }
