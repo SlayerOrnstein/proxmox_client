@@ -2,6 +2,7 @@ import 'package:proxmox_client/src/api/endpoints/access/domains.dart';
 import 'package:proxmox_client/src/api/endpoints/access/groups.dart';
 import 'package:proxmox_client/src/api/endpoints/access/open_id.dart';
 import 'package:proxmox_client/src/api/endpoints/endpoint.dart';
+import 'package:proxmox_client/src/utils/utils.dart';
 
 /// {@template access}
 /// Functions to interact with the access/domains endpoint of proxmox
@@ -11,14 +12,18 @@ class ProxmoxAccess extends ProxmoxEndpoint {
   ProxmoxAccess({required super.baseUrl, required super.client});
 
   @override
-  Uri get endpoint => Uri.parse('$baseUrl/access');
+  Uri get endpoint => baseUrl.addPath('access');
 
   /// Domain endpoint
-  ProxmoxRealms get realms => ProxmoxRealms(baseUrl: endpoint, client: client);
+  ProxmoxDomains get realms =>
+      ProxmoxDomains(baseUrl: endpoint, client: client);
 
   /// Group endpoint
   ProxmoxGroup get groups => ProxmoxGroup(baseUrl: endpoint, client: client);
 
   /// OpenID endpoint
+  ///
+  /// NOTE: untested
+  // TODO(Ornstein): need to setup an OpenID and TFA so I can test this out more
   ProxmoxOpenId get openId => ProxmoxOpenId(baseUrl: endpoint, client: client);
 }

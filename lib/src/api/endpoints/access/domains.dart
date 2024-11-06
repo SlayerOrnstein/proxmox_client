@@ -6,31 +6,30 @@ import 'package:proxmox_client/src/utils/utils.dart';
 /// {@template access}
 /// Functions to interact with the access/domains endpoint of proxmox
 /// {@endtemplate}
-class ProxmoxRealms extends ProxmoxEndpoint {
+class ProxmoxDomains extends ProxmoxEndpoint {
   /// {@macro access}
-  ProxmoxRealms({required super.baseUrl, required super.client});
+  ProxmoxDomains({required super.baseUrl, required super.client});
 
   @override
-  Uri get endpoint => Uri.parse('$baseUrl/domains');
+  Uri get endpoint => baseUrl.addPath('domains');
 
   /// Fetch a list of configured domains
-  Future<List<Domain>> fetchRealms() async {
-    final json = decodeJsonObject((await client.get(endpoint)).body);
+  Future<List<Domain>> fetchDomains() async {
+    final response = await client.get(endpoint);
+    final json = decodeJsonObject(response.body);
     final data = List<Map<String, dynamic>>.from(json['data'] as List<dynamic>);
 
     return data.map(Domain.fromMap).toList();
   }
 
   /// Adds a new domain
-  Future<void> createRealm(RealmConfig domain) async {
-    final domains = await fetchRealms();
+  Future<void> createDomain(DomainConfig domain) async {
+    final domains = await fetchDomains();
     if (domains.firstWhereOrNull((d) => d.realm == domain.realm) != null) {
       throw Exception('Realm with name already exist');
     }
 
     final body = toFormUrl(domain.toMap());
-    // Realm type doesn't get added in the toMap() so add it here
-    body['type'] = domain.type.name;
 
     final response = await client.post(endpoint, body: body);
     if (response.statusCode != 200) {
@@ -40,28 +39,26 @@ class ProxmoxRealms extends ProxmoxEndpoint {
   }
 
   /// Update an auth server's settings
-  Future<void> updateRealm(RealmConfig domain) async {
-    final url = endpoint.resolve(domain.realm);
-
+  Future<void> updateDomain(DomainConfig domain) async {
+    final url = endpoint.addPath(domain.realm);
     final body = toFormUrl(domain.toMap());
-    // Realm type doesn't get added in the toMap() so add it here
-    body['type'] = domain.type.name;
 
     await client.put(url, body: body);
   }
 
   /// Delete and authentication server
-  Future<void> removeRealm(String realm) async {
-    await client.delete(endpoint.resolve(realm));
+  Future<void> removeDomain(String realm) async {
+    await client.delete(endpoint.addPath(realm));
   }
 
   /// Syncs users and/or groups from the configured LDAP to user.cfg.
   ///
   /// NOTE: Synced groups will have the name 'name-$realm', so make sure those
   /// groups do not exist to prevent overwriting.
-  Future<void> syncRealm(String realm, SyncOptions options) async {
-    final url = endpoint.resolve('/$realm/sync');
-
-    await client.post(url, body: {'realm': realm, ...options.toMap()});
+  Future<void> syncDomain(String realm, SyncOptions options) async {
+    await client.post(
+      endpoint.addPath('$realm/sync'),
+      body: {'realm': realm, ...options.toMap()},
+    );
   }
 }

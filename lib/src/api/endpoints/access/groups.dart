@@ -9,15 +9,19 @@ class ProxmoxGroup extends ProxmoxEndpoint {
   /// {@macro groups}
   ProxmoxGroup({required super.baseUrl, required super.client});
 
-  /// Fetch a list of currently configured groups
-  Future<List<Group>> fetchGroups() async {
-    final json = decodeJsonArray((await client.get(endpoint)).body);
+  @override
+  Uri get endpoint => baseUrl.addPath('groups');
 
-    return json.map(Group.fromMap).toList();
+  /// Fetch a list of currently configured groups
+  Future<List<GroupItem>> fetchGroups() async {
+    final json = decodeJsonObject((await client.get(endpoint)).body);
+    final data = List<Map<String, dynamic>>.from(json['data'] as List<dynamic>);
+
+    return data.map(GroupItem.fromMap).toList();
   }
 
   /// Creates a new group
-  Future<void> createGroup(String id, [String? comment]) async {
+  Future<void> createGroup(String id, {String? comment}) async {
     await client.post(
       endpoint,
       body: {'groupid': id, if (comment != null) 'comment': comment},
@@ -25,26 +29,27 @@ class ProxmoxGroup extends ProxmoxEndpoint {
   }
 
   /// Fetch a configured groups
-  Future<Group> fetchGroup(String id) async {
-    final url = endpoint.resolve(id);
-    final json = decodeJsonObject((await client.get(url)).body);
+  Future<GroupExpanded?> fetchGroup(String id) async {
+    final url = endpoint.addPath(id);
+    final response = await client.get(url);
+    final json =
+        decodeJsonObject(response.body)['data'] as Map<String, dynamic>?;
 
-    return Group.fromMap(json);
+    if (json == null) return null;
+
+    return GroupExpanded.fromMap(json);
   }
 
   /// Updates an exisiting group
-  Future<void> updateGroup(String id, [String? comment]) async {
+  Future<void> updateGroup(String id, {String? comment}) async {
     await client.put(
-      endpoint.resolve(id),
+      endpoint.addPath(id),
       body: {'groupid': id, if (comment != null) 'comment': comment},
     );
   }
 
   /// Removes a group
   Future<void> removeGroup(String id) async {
-    await client.delete(endpoint.resolve(id));
+    await client.delete(endpoint.addPath(id));
   }
-
-  @override
-  Uri get endpoint => baseUrl.resolve('groups/');
 }
