@@ -53,7 +53,7 @@ jobs:
         env:
           PVE_IP: ${{ secrets.PVE_IP }}
           PVE_USER: ${{ secrets.PVE_USER }}
-          PVE_APIkEY: ${{ secrets.PVE_API_KEY }}
+          PVE_API_KEY: ${{ secrets.PVE_API_KEY }}
         run: |
           dart pub global activate coverage 1.2.0
           dart test -j 4 --coverage=coverage --platform=vm && dart pub global run coverage:format_coverage --lcov --in=coverage --out=coverage/lcov.info --packages=.dart_tool/package_config.json --report-on=lib
