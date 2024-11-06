@@ -1,4 +1,5 @@
 import 'package:dart_mappable/dart_mappable.dart';
+import 'package:proxmox_client/src/hooks/hooks.dart';
 
 part 'domain.mapper.dart';
 
@@ -22,6 +23,7 @@ class Domain with DomainMappable {
     required this.type,
     this.comment,
     this.tfa,
+    this.isDefault = false,
   });
 
   /// Create a [Domain] from JSON
@@ -45,4 +47,8 @@ class Domain with DomainMappable {
 
   /// Two-factor authentication provider
   final Tfa? tfa;
+
+  /// Whether this domain is the default
+  @MappableField(key: 'default', hook: ProxmoxBoolHook())
+  final bool isDefault;
 }

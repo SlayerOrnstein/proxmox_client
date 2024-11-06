@@ -4,7 +4,7 @@
 // ignore_for_file: unused_element, unnecessary_cast, override_on_non_overriding_member
 // ignore_for_file: strict_raw_type, inference_failure_on_untyped_parameter
 
-part of 'realm_config.dart';
+part of 'domain_config.dart';
 
 class RealmTypeMapper extends EnumMapper<RealmType> {
   RealmTypeMapper._();
@@ -222,13 +222,13 @@ extension PromptMapperExtension on Prompt {
   }
 }
 
-class ADRealmMapper extends ClassMapperBase<ADRealm> {
-  ADRealmMapper._();
+class ADDomainMapper extends ClassMapperBase<ADDomain> {
+  ADDomainMapper._();
 
-  static ADRealmMapper? _instance;
-  static ADRealmMapper ensureInitialized() {
+  static ADDomainMapper? _instance;
+  static ADDomainMapper ensureInitialized() {
     if (_instance == null) {
-      MapperContainer.globals.use(_instance = ADRealmMapper._());
+      MapperContainer.globals.use(_instance = ADDomainMapper._());
       LdapModeMapper.ensureInitialized();
       SyncOptionsMapper.ensureInitialized();
       SslVersionMapper.ensureInitialized();
@@ -237,50 +237,54 @@ class ADRealmMapper extends ClassMapperBase<ADRealm> {
   }
 
   @override
-  final String id = 'ADRealm';
+  final String id = 'ADDomain';
 
-  static String _$realm(ADRealm v) => v.realm;
-  static const Field<ADRealm, String> _f$realm = Field('realm', _$realm);
-  static String _$primaryServer(ADRealm v) => v.primaryServer;
-  static const Field<ADRealm, String> _f$primaryServer =
+  static String _$realm(ADDomain v) => v.realm;
+  static const Field<ADDomain, String> _f$realm = Field('realm', _$realm);
+  static String _$primaryServer(ADDomain v) => v.primaryServer;
+  static const Field<ADDomain, String> _f$primaryServer =
       Field('primaryServer', _$primaryServer, key: 'server1');
-  static int _$port(ADRealm v) => v.port;
-  static const Field<ADRealm, int> _f$port = Field('port', _$port);
-  static LdapMode _$mode(ADRealm v) => v.mode;
-  static const Field<ADRealm, LdapMode> _f$mode = Field('mode', _$mode);
-  static String _$domain(ADRealm v) => v.domain;
-  static const Field<ADRealm, String> _f$domain = Field('domain', _$domain);
-  static String? _$comment(ADRealm v) => v.comment;
-  static const Field<ADRealm, String> _f$comment =
+  static int _$port(ADDomain v) => v.port;
+  static const Field<ADDomain, int> _f$port = Field('port', _$port);
+  static LdapMode _$mode(ADDomain v) => v.mode;
+  static const Field<ADDomain, LdapMode> _f$mode = Field('mode', _$mode);
+  static String _$domain(ADDomain v) => v.domain;
+  static const Field<ADDomain, String> _f$domain = Field('domain', _$domain);
+  static String? _$comment(ADDomain v) => v.comment;
+  static const Field<ADDomain, String> _f$comment =
       Field('comment', _$comment, opt: true);
-  static String? _$fallbackServer(ADRealm v) => v.fallbackServer;
-  static const Field<ADRealm, String> _f$fallbackServer =
+  static String? _$fallbackServer(ADDomain v) => v.fallbackServer;
+  static const Field<ADDomain, String> _f$fallbackServer =
       Field('fallbackServer', _$fallbackServer, key: 'server2', opt: true);
-  static bool? _$isDefault(ADRealm v) => v.isDefault;
-  static const Field<ADRealm, bool> _f$isDefault = Field(
+  static bool? _$isDefault(ADDomain v) => v.isDefault;
+  static const Field<ADDomain, bool> _f$isDefault = Field(
       'isDefault', _$isDefault,
       key: 'default', opt: true, hook: ProxmoxBoolHook());
-  static bool? _$shouldVerify(ADRealm v) => v.shouldVerify;
-  static const Field<ADRealm, bool> _f$shouldVerify = Field(
+  static bool? _$shouldVerify(ADDomain v) => v.shouldVerify;
+  static const Field<ADDomain, bool> _f$shouldVerify = Field(
       'shouldVerify', _$shouldVerify,
       key: 'verify', opt: true, hook: ProxmoxBoolHook());
-  static String? _$tfa(ADRealm v) => v.tfa;
-  static const Field<ADRealm, String> _f$tfa = Field('tfa', _$tfa, opt: true);
-  static SyncOptions? _$syncDefaultsOptions(ADRealm v) => v.syncDefaultsOptions;
-  static const Field<ADRealm, SyncOptions> _f$syncDefaultsOptions = Field(
+  static String? _$tfa(ADDomain v) => v.tfa;
+  static const Field<ADDomain, String> _f$tfa = Field('tfa', _$tfa, opt: true);
+  static SyncOptions? _$syncDefaultsOptions(ADDomain v) =>
+      v.syncDefaultsOptions;
+  static const Field<ADDomain, SyncOptions> _f$syncDefaultsOptions = Field(
       'syncDefaultsOptions', _$syncDefaultsOptions,
       key: 'sync-defaults-options', opt: true, hook: SyncDefaultsOptions());
-  static bool _$checkConnection(ADRealm v) => v.checkConnection;
-  static const Field<ADRealm, bool> _f$checkConnection = Field(
+  static bool _$checkConnection(ADDomain v) => v.checkConnection;
+  static const Field<ADDomain, bool> _f$checkConnection = Field(
       'checkConnection', _$checkConnection,
       key: 'check-connection', opt: true, def: true, hook: ProxmoxBoolHook());
-  static SslVersion? _$sslVersion(ADRealm v) => v.sslVersion;
-  static const Field<ADRealm, SslVersion> _f$sslVersion = Field(
+  static SslVersion? _$sslVersion(ADDomain v) => v.sslVersion;
+  static const Field<ADDomain, SslVersion> _f$sslVersion = Field(
       'sslVersion', _$sslVersion,
       key: 'sslversion', opt: true, def: SslVersion.tlsv1_3);
+  static RealmType _$type(ADDomain v) => v.type;
+  static const Field<ADDomain, RealmType> _f$type =
+      Field('type', _$type, hook: DomainTypeHook());
 
   @override
-  final MappableFields<ADRealm> fields = const {
+  final MappableFields<ADDomain> fields = const {
     #realm: _f$realm,
     #primaryServer: _f$primaryServer,
     #port: _f$port,
@@ -294,10 +298,11 @@ class ADRealmMapper extends ClassMapperBase<ADRealm> {
     #syncDefaultsOptions: _f$syncDefaultsOptions,
     #checkConnection: _f$checkConnection,
     #sslVersion: _f$sslVersion,
+    #type: _f$type,
   };
 
-  static ADRealm _instantiate(DecodingData data) {
-    return ADRealm(
+  static ADDomain _instantiate(DecodingData data) {
+    return ADDomain(
         realm: data.dec(_f$realm),
         primaryServer: data.dec(_f$primaryServer),
         port: data.dec(_f$port),
@@ -316,51 +321,51 @@ class ADRealmMapper extends ClassMapperBase<ADRealm> {
   @override
   final Function instantiate = _instantiate;
 
-  static ADRealm fromMap(Map<String, dynamic> map) {
-    return ensureInitialized().decodeMap<ADRealm>(map);
+  static ADDomain fromMap(Map<String, dynamic> map) {
+    return ensureInitialized().decodeMap<ADDomain>(map);
   }
 
-  static ADRealm fromJson(String json) {
-    return ensureInitialized().decodeJson<ADRealm>(json);
+  static ADDomain fromJson(String json) {
+    return ensureInitialized().decodeJson<ADDomain>(json);
   }
 }
 
-mixin ADRealmMappable {
+mixin ADDomainMappable {
   String toJson() {
-    return ADRealmMapper.ensureInitialized()
-        .encodeJson<ADRealm>(this as ADRealm);
+    return ADDomainMapper.ensureInitialized()
+        .encodeJson<ADDomain>(this as ADDomain);
   }
 
   Map<String, dynamic> toMap() {
-    return ADRealmMapper.ensureInitialized()
-        .encodeMap<ADRealm>(this as ADRealm);
+    return ADDomainMapper.ensureInitialized()
+        .encodeMap<ADDomain>(this as ADDomain);
   }
 
-  ADRealmCopyWith<ADRealm, ADRealm, ADRealm> get copyWith =>
-      _ADRealmCopyWithImpl(this as ADRealm, $identity, $identity);
+  ADDomainCopyWith<ADDomain, ADDomain, ADDomain> get copyWith =>
+      _ADDomainCopyWithImpl(this as ADDomain, $identity, $identity);
   @override
   String toString() {
-    return ADRealmMapper.ensureInitialized().stringifyValue(this as ADRealm);
+    return ADDomainMapper.ensureInitialized().stringifyValue(this as ADDomain);
   }
 
   @override
   bool operator ==(Object other) {
-    return ADRealmMapper.ensureInitialized()
-        .equalsValue(this as ADRealm, other);
+    return ADDomainMapper.ensureInitialized()
+        .equalsValue(this as ADDomain, other);
   }
 
   @override
   int get hashCode {
-    return ADRealmMapper.ensureInitialized().hashValue(this as ADRealm);
+    return ADDomainMapper.ensureInitialized().hashValue(this as ADDomain);
   }
 }
 
-extension ADRealmValueCopy<$R, $Out> on ObjectCopyWith<$R, ADRealm, $Out> {
-  ADRealmCopyWith<$R, ADRealm, $Out> get $asADRealm =>
-      $base.as((v, t, t2) => _ADRealmCopyWithImpl(v, t, t2));
+extension ADDomainValueCopy<$R, $Out> on ObjectCopyWith<$R, ADDomain, $Out> {
+  ADDomainCopyWith<$R, ADDomain, $Out> get $asADDomain =>
+      $base.as((v, t, t2) => _ADDomainCopyWithImpl(v, t, t2));
 }
 
-abstract class ADRealmCopyWith<$R, $In extends ADRealm, $Out>
+abstract class ADDomainCopyWith<$R, $In extends ADDomain, $Out>
     implements ClassCopyWith<$R, $In, $Out> {
   SyncOptionsCopyWith<$R, SyncOptions, SyncOptions>? get syncDefaultsOptions;
   $R call(
@@ -377,17 +382,17 @@ abstract class ADRealmCopyWith<$R, $In extends ADRealm, $Out>
       SyncOptions? syncDefaultsOptions,
       bool? checkConnection,
       SslVersion? sslVersion});
-  ADRealmCopyWith<$R2, $In, $Out2> $chain<$R2, $Out2>(Then<$Out2, $R2> t);
+  ADDomainCopyWith<$R2, $In, $Out2> $chain<$R2, $Out2>(Then<$Out2, $R2> t);
 }
 
-class _ADRealmCopyWithImpl<$R, $Out>
-    extends ClassCopyWithBase<$R, ADRealm, $Out>
-    implements ADRealmCopyWith<$R, ADRealm, $Out> {
-  _ADRealmCopyWithImpl(super.value, super.then, super.then2);
+class _ADDomainCopyWithImpl<$R, $Out>
+    extends ClassCopyWithBase<$R, ADDomain, $Out>
+    implements ADDomainCopyWith<$R, ADDomain, $Out> {
+  _ADDomainCopyWithImpl(super.value, super.then, super.then2);
 
   @override
-  late final ClassMapperBase<ADRealm> $mapper =
-      ADRealmMapper.ensureInitialized();
+  late final ClassMapperBase<ADDomain> $mapper =
+      ADDomainMapper.ensureInitialized();
   @override
   SyncOptionsCopyWith<$R, SyncOptions, SyncOptions>? get syncDefaultsOptions =>
       $value.syncDefaultsOptions?.copyWith
@@ -424,7 +429,7 @@ class _ADRealmCopyWithImpl<$R, $Out>
         if (sslVersion != $none) #sslVersion: sslVersion
       }));
   @override
-  ADRealm $make(CopyWithData data) => ADRealm(
+  ADDomain $make(CopyWithData data) => ADDomain(
       realm: data.get(#realm, or: $value.realm),
       primaryServer: data.get(#primaryServer, or: $value.primaryServer),
       port: data.get(#port, or: $value.port),
@@ -441,17 +446,18 @@ class _ADRealmCopyWithImpl<$R, $Out>
       sslVersion: data.get(#sslVersion, or: $value.sslVersion));
 
   @override
-  ADRealmCopyWith<$R2, ADRealm, $Out2> $chain<$R2, $Out2>(Then<$Out2, $R2> t) =>
-      _ADRealmCopyWithImpl($value, $cast, t);
+  ADDomainCopyWith<$R2, ADDomain, $Out2> $chain<$R2, $Out2>(
+          Then<$Out2, $R2> t) =>
+      _ADDomainCopyWithImpl($value, $cast, t);
 }
 
-class LdapRealmMapper extends ClassMapperBase<LdapRealm> {
-  LdapRealmMapper._();
+class LdapDomainMapper extends ClassMapperBase<LdapDomain> {
+  LdapDomainMapper._();
 
-  static LdapRealmMapper? _instance;
-  static LdapRealmMapper ensureInitialized() {
+  static LdapDomainMapper? _instance;
+  static LdapDomainMapper ensureInitialized() {
     if (_instance == null) {
-      MapperContainer.globals.use(_instance = LdapRealmMapper._());
+      MapperContainer.globals.use(_instance = LdapDomainMapper._());
       LdapModeMapper.ensureInitialized();
       SyncOptionsMapper.ensureInitialized();
       SslVersionMapper.ensureInitialized();
@@ -460,55 +466,59 @@ class LdapRealmMapper extends ClassMapperBase<LdapRealm> {
   }
 
   @override
-  final String id = 'LdapRealm';
+  final String id = 'LdapDomain';
 
-  static String _$realm(LdapRealm v) => v.realm;
-  static const Field<LdapRealm, String> _f$realm = Field('realm', _$realm);
-  static String _$primaryServer(LdapRealm v) => v.primaryServer;
-  static const Field<LdapRealm, String> _f$primaryServer =
+  static String _$realm(LdapDomain v) => v.realm;
+  static const Field<LdapDomain, String> _f$realm = Field('realm', _$realm);
+  static String _$primaryServer(LdapDomain v) => v.primaryServer;
+  static const Field<LdapDomain, String> _f$primaryServer =
       Field('primaryServer', _$primaryServer, key: 'server1');
-  static int _$port(LdapRealm v) => v.port;
-  static const Field<LdapRealm, int> _f$port = Field('port', _$port);
-  static LdapMode _$mode(LdapRealm v) => v.mode;
-  static const Field<LdapRealm, LdapMode> _f$mode = Field('mode', _$mode);
-  static String _$baseDomainName(LdapRealm v) => v.baseDomainName;
-  static const Field<LdapRealm, String> _f$baseDomainName =
+  static int _$port(LdapDomain v) => v.port;
+  static const Field<LdapDomain, int> _f$port = Field('port', _$port);
+  static LdapMode _$mode(LdapDomain v) => v.mode;
+  static const Field<LdapDomain, LdapMode> _f$mode = Field('mode', _$mode);
+  static String _$baseDomainName(LdapDomain v) => v.baseDomainName;
+  static const Field<LdapDomain, String> _f$baseDomainName =
       Field('baseDomainName', _$baseDomainName, key: 'base_dn');
-  static String? _$userAttributeName(LdapRealm v) => v.userAttributeName;
-  static const Field<LdapRealm, String> _f$userAttributeName =
+  static String? _$userAttributeName(LdapDomain v) => v.userAttributeName;
+  static const Field<LdapDomain, String> _f$userAttributeName =
       Field('userAttributeName', _$userAttributeName, key: 'user_attr');
-  static String? _$comment(LdapRealm v) => v.comment;
-  static const Field<LdapRealm, String> _f$comment =
+  static String? _$comment(LdapDomain v) => v.comment;
+  static const Field<LdapDomain, String> _f$comment =
       Field('comment', _$comment, opt: true);
-  static String? _$fallbackServer(LdapRealm v) => v.fallbackServer;
-  static const Field<LdapRealm, String> _f$fallbackServer =
+  static String? _$fallbackServer(LdapDomain v) => v.fallbackServer;
+  static const Field<LdapDomain, String> _f$fallbackServer =
       Field('fallbackServer', _$fallbackServer, key: 'server2', opt: true);
-  static bool? _$isDefault(LdapRealm v) => v.isDefault;
-  static const Field<LdapRealm, bool> _f$isDefault = Field(
+  static bool? _$isDefault(LdapDomain v) => v.isDefault;
+  static const Field<LdapDomain, bool> _f$isDefault = Field(
       'isDefault', _$isDefault,
       key: 'default', opt: true, hook: ProxmoxBoolHook());
-  static bool? _$shouldVerify(LdapRealm v) => v.shouldVerify;
-  static const Field<LdapRealm, bool> _f$shouldVerify = Field(
+  static bool? _$shouldVerify(LdapDomain v) => v.shouldVerify;
+  static const Field<LdapDomain, bool> _f$shouldVerify = Field(
       'shouldVerify', _$shouldVerify,
       key: 'verify', opt: true, hook: ProxmoxBoolHook());
-  static String? _$tfa(LdapRealm v) => v.tfa;
-  static const Field<LdapRealm, String> _f$tfa = Field('tfa', _$tfa, opt: true);
-  static SyncOptions? _$syncDefaultsOptions(LdapRealm v) =>
+  static String? _$tfa(LdapDomain v) => v.tfa;
+  static const Field<LdapDomain, String> _f$tfa =
+      Field('tfa', _$tfa, opt: true);
+  static SyncOptions? _$syncDefaultsOptions(LdapDomain v) =>
       v.syncDefaultsOptions;
-  static const Field<LdapRealm, SyncOptions> _f$syncDefaultsOptions = Field(
+  static const Field<LdapDomain, SyncOptions> _f$syncDefaultsOptions = Field(
       'syncDefaultsOptions', _$syncDefaultsOptions,
       key: 'sync-defaults-options', opt: true, hook: SyncDefaultsOptions());
-  static bool _$checkConnection(LdapRealm v) => v.checkConnection;
-  static const Field<LdapRealm, bool> _f$checkConnection = Field(
+  static bool _$checkConnection(LdapDomain v) => v.checkConnection;
+  static const Field<LdapDomain, bool> _f$checkConnection = Field(
       'checkConnection', _$checkConnection,
       key: 'check-connection', opt: true, def: true, hook: ProxmoxBoolHook());
-  static SslVersion? _$sslVersion(LdapRealm v) => v.sslVersion;
-  static const Field<LdapRealm, SslVersion> _f$sslVersion = Field(
+  static SslVersion? _$sslVersion(LdapDomain v) => v.sslVersion;
+  static const Field<LdapDomain, SslVersion> _f$sslVersion = Field(
       'sslVersion', _$sslVersion,
       key: 'sslversion', opt: true, def: SslVersion.tlsv1_3);
+  static RealmType _$type(LdapDomain v) => v.type;
+  static const Field<LdapDomain, RealmType> _f$type =
+      Field('type', _$type, hook: DomainTypeHook());
 
   @override
-  final MappableFields<LdapRealm> fields = const {
+  final MappableFields<LdapDomain> fields = const {
     #realm: _f$realm,
     #primaryServer: _f$primaryServer,
     #port: _f$port,
@@ -523,10 +533,11 @@ class LdapRealmMapper extends ClassMapperBase<LdapRealm> {
     #syncDefaultsOptions: _f$syncDefaultsOptions,
     #checkConnection: _f$checkConnection,
     #sslVersion: _f$sslVersion,
+    #type: _f$type,
   };
 
-  static LdapRealm _instantiate(DecodingData data) {
-    return LdapRealm(
+  static LdapDomain _instantiate(DecodingData data) {
+    return LdapDomain(
         realm: data.dec(_f$realm),
         primaryServer: data.dec(_f$primaryServer),
         port: data.dec(_f$port),
@@ -546,52 +557,53 @@ class LdapRealmMapper extends ClassMapperBase<LdapRealm> {
   @override
   final Function instantiate = _instantiate;
 
-  static LdapRealm fromMap(Map<String, dynamic> map) {
-    return ensureInitialized().decodeMap<LdapRealm>(map);
+  static LdapDomain fromMap(Map<String, dynamic> map) {
+    return ensureInitialized().decodeMap<LdapDomain>(map);
   }
 
-  static LdapRealm fromJson(String json) {
-    return ensureInitialized().decodeJson<LdapRealm>(json);
+  static LdapDomain fromJson(String json) {
+    return ensureInitialized().decodeJson<LdapDomain>(json);
   }
 }
 
-mixin LdapRealmMappable {
+mixin LdapDomainMappable {
   String toJson() {
-    return LdapRealmMapper.ensureInitialized()
-        .encodeJson<LdapRealm>(this as LdapRealm);
+    return LdapDomainMapper.ensureInitialized()
+        .encodeJson<LdapDomain>(this as LdapDomain);
   }
 
   Map<String, dynamic> toMap() {
-    return LdapRealmMapper.ensureInitialized()
-        .encodeMap<LdapRealm>(this as LdapRealm);
+    return LdapDomainMapper.ensureInitialized()
+        .encodeMap<LdapDomain>(this as LdapDomain);
   }
 
-  LdapRealmCopyWith<LdapRealm, LdapRealm, LdapRealm> get copyWith =>
-      _LdapRealmCopyWithImpl(this as LdapRealm, $identity, $identity);
+  LdapDomainCopyWith<LdapDomain, LdapDomain, LdapDomain> get copyWith =>
+      _LdapDomainCopyWithImpl(this as LdapDomain, $identity, $identity);
   @override
   String toString() {
-    return LdapRealmMapper.ensureInitialized()
-        .stringifyValue(this as LdapRealm);
+    return LdapDomainMapper.ensureInitialized()
+        .stringifyValue(this as LdapDomain);
   }
 
   @override
   bool operator ==(Object other) {
-    return LdapRealmMapper.ensureInitialized()
-        .equalsValue(this as LdapRealm, other);
+    return LdapDomainMapper.ensureInitialized()
+        .equalsValue(this as LdapDomain, other);
   }
 
   @override
   int get hashCode {
-    return LdapRealmMapper.ensureInitialized().hashValue(this as LdapRealm);
+    return LdapDomainMapper.ensureInitialized().hashValue(this as LdapDomain);
   }
 }
 
-extension LdapRealmValueCopy<$R, $Out> on ObjectCopyWith<$R, LdapRealm, $Out> {
-  LdapRealmCopyWith<$R, LdapRealm, $Out> get $asLdapRealm =>
-      $base.as((v, t, t2) => _LdapRealmCopyWithImpl(v, t, t2));
+extension LdapDomainValueCopy<$R, $Out>
+    on ObjectCopyWith<$R, LdapDomain, $Out> {
+  LdapDomainCopyWith<$R, LdapDomain, $Out> get $asLdapDomain =>
+      $base.as((v, t, t2) => _LdapDomainCopyWithImpl(v, t, t2));
 }
 
-abstract class LdapRealmCopyWith<$R, $In extends LdapRealm, $Out>
+abstract class LdapDomainCopyWith<$R, $In extends LdapDomain, $Out>
     implements ClassCopyWith<$R, $In, $Out> {
   SyncOptionsCopyWith<$R, SyncOptions, SyncOptions>? get syncDefaultsOptions;
   $R call(
@@ -609,17 +621,17 @@ abstract class LdapRealmCopyWith<$R, $In extends LdapRealm, $Out>
       SyncOptions? syncDefaultsOptions,
       bool? checkConnection,
       SslVersion? sslVersion});
-  LdapRealmCopyWith<$R2, $In, $Out2> $chain<$R2, $Out2>(Then<$Out2, $R2> t);
+  LdapDomainCopyWith<$R2, $In, $Out2> $chain<$R2, $Out2>(Then<$Out2, $R2> t);
 }
 
-class _LdapRealmCopyWithImpl<$R, $Out>
-    extends ClassCopyWithBase<$R, LdapRealm, $Out>
-    implements LdapRealmCopyWith<$R, LdapRealm, $Out> {
-  _LdapRealmCopyWithImpl(super.value, super.then, super.then2);
+class _LdapDomainCopyWithImpl<$R, $Out>
+    extends ClassCopyWithBase<$R, LdapDomain, $Out>
+    implements LdapDomainCopyWith<$R, LdapDomain, $Out> {
+  _LdapDomainCopyWithImpl(super.value, super.then, super.then2);
 
   @override
-  late final ClassMapperBase<LdapRealm> $mapper =
-      LdapRealmMapper.ensureInitialized();
+  late final ClassMapperBase<LdapDomain> $mapper =
+      LdapDomainMapper.ensureInitialized();
   @override
   SyncOptionsCopyWith<$R, SyncOptions, SyncOptions>? get syncDefaultsOptions =>
       $value.syncDefaultsOptions?.copyWith
@@ -658,7 +670,7 @@ class _LdapRealmCopyWithImpl<$R, $Out>
         if (sslVersion != $none) #sslVersion: sslVersion
       }));
   @override
-  LdapRealm $make(CopyWithData data) => LdapRealm(
+  LdapDomain $make(CopyWithData data) => LdapDomain(
       realm: data.get(#realm, or: $value.realm),
       primaryServer: data.get(#primaryServer, or: $value.primaryServer),
       port: data.get(#port, or: $value.port),
@@ -677,9 +689,9 @@ class _LdapRealmCopyWithImpl<$R, $Out>
       sslVersion: data.get(#sslVersion, or: $value.sslVersion));
 
   @override
-  LdapRealmCopyWith<$R2, LdapRealm, $Out2> $chain<$R2, $Out2>(
+  LdapDomainCopyWith<$R2, LdapDomain, $Out2> $chain<$R2, $Out2>(
           Then<$Out2, $R2> t) =>
-      _LdapRealmCopyWithImpl($value, $cast, t);
+      _LdapDomainCopyWithImpl($value, $cast, t);
 }
 
 class OpenIdMapper extends ClassMapperBase<OpenId> {
@@ -732,6 +744,9 @@ class OpenIdMapper extends ClassMapperBase<OpenId> {
   static const Field<OpenId, String> _f$acrValues = Field(
       'acrValues', _$acrValues,
       key: 'acr-values', opt: true, hook: AcrValuesHook());
+  static RealmType _$type(OpenId v) => v.type;
+  static const Field<OpenId, RealmType> _f$type =
+      Field('type', _$type, hook: DomainTypeHook());
 
   @override
   final MappableFields<OpenId> fields = const {
@@ -746,6 +761,7 @@ class OpenIdMapper extends ClassMapperBase<OpenId> {
     #usernameClaim: _f$usernameClaim,
     #prompt: _f$prompt,
     #acrValues: _f$acrValues,
+    #type: _f$type,
   };
 
   static OpenId _instantiate(DecodingData data) {

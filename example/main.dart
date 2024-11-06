@@ -16,7 +16,7 @@ class DevHttpOverrides extends HttpOverrides {
 
 Future<void> main() async {
   // root@pam!proxmox-client
-  // 5ad6dc0c-dea2-4c52-940d-a7c2380f6ed0
+  // ed589c01-3850-4d46-86cf-9b4519fd9598
   const token = (
     id: 'root@pam!proxmox-client',
     token: 'uuid',
@@ -24,13 +24,14 @@ Future<void> main() async {
 
   HttpOverrides.global = DevHttpOverrides();
 
-  final client = ProxmoxClient(token: token, host: '10.13.0.256');
+  final client =
+      ProxmoxClient(token: token, host: InternetAddress('10.13.0.256'));
 
-  var domains = await client.access.realms.fetchRealms();
+  var domains = await client.access.realms.fetchDomains();
   domains.forEach((d) => print(d.realm));
 
-  await client.access.realms.createRealm(
-    ADRealm(
+  await client.access.realms.createDomain(
+    const ADDomain(
       realm: 'ad-test',
       domain: 'hello-world.com',
       mode: LdapMode.ldap,
@@ -40,8 +41,8 @@ Future<void> main() async {
     ),
   );
 
-  await client.access.realms.createRealm(
-    LdapRealm(
+  await client.access.realms.createDomain(
+    const LdapDomain(
       realm: 'ldap-test',
       baseDomainName: 'hello-world.com',
       mode: LdapMode.ldap,
@@ -52,8 +53,8 @@ Future<void> main() async {
     ),
   );
 
-  await client.access.realms.createRealm(
-    OpenId(
+  await client.access.realms.createDomain(
+    const OpenId(
       realm: 'openid-test',
       issuerUrl: 'hello-world.com',
       clientId: 'random-id',
@@ -61,6 +62,6 @@ Future<void> main() async {
     ),
   );
 
-  domains = await client.access.realms.fetchRealms()
+  domains = await client.access.realms.fetchDomains()
     ..forEach((d) => print(d.realm));
 }

@@ -2,7 +2,7 @@ import 'package:dart_mappable/dart_mappable.dart';
 import 'package:proxmox_client/src/hooks/hooks.dart';
 import 'package:proxmox_client/src/models/models.dart';
 
-part 'realm_config.mapper.dart';
+part 'domain_config.mapper.dart';
 
 /// Realm type
 @MappableEnum()
@@ -40,9 +40,9 @@ enum LdapMode {
 /// {@template realm_config}
 /// Base class for all realm configs
 /// {@endtemplate}
-abstract class RealmConfig {
+abstract class DomainConfig {
   /// {@macro realm_config}
-  RealmConfig({required this.realm, this.comment, this.isDefault});
+  const DomainConfig({required this.realm, this.comment, this.isDefault});
 
   /// Authentication domain ID
   final String realm;
@@ -86,9 +86,9 @@ enum SslVersion {
 /// {@template ldap_based_config}
 /// Base class for all LDAP based realm configs
 /// {@endtemplate}
-abstract class LdapBased extends RealmConfig {
+abstract class LdapDomainConfig extends DomainConfig {
   /// {@macro ldap_based_config}
-  LdapBased({
+  const LdapDomainConfig({
     required super.realm,
     required this.primaryServer,
     required this.mode,
@@ -141,9 +141,9 @@ abstract class LdapBased extends RealmConfig {
 /// Microsoft Active Directory realm config
 /// {@endtemplate}
 @MappableClass()
-class ADRealm extends LdapBased with ADRealmMappable {
+class ADDomain extends LdapDomainConfig with ADDomainMappable {
   /// {@macro ad_config}
-  ADRealm({
+  const ADDomain({
     required super.realm,
     required super.primaryServer,
     required super.port,
@@ -162,6 +162,7 @@ class ADRealm extends LdapBased with ADRealmMappable {
   /// The AD domain of the server
   final String domain;
 
+  @MappableField(hook: DomainTypeHook())
   @override
   RealmType get type => RealmType.ad;
 }
@@ -170,9 +171,9 @@ class ADRealm extends LdapBased with ADRealmMappable {
 /// LDAP realm config
 /// {@endtemplate}
 @MappableClass()
-class LdapRealm extends LdapBased with LdapRealmMappable {
+class LdapDomain extends LdapDomainConfig with LdapDomainMappable {
   /// {@macro ldap_config}
-  LdapRealm({
+  const LdapDomain({
     required super.realm,
     required super.primaryServer,
     required super.port,
@@ -197,6 +198,7 @@ class LdapRealm extends LdapBased with LdapRealmMappable {
   @MappableField(key: 'user_attr')
   final String? userAttributeName;
 
+  @MappableField(hook: DomainTypeHook())
   @override
   RealmType get type => RealmType.ldap;
 }
@@ -222,9 +224,9 @@ enum Prompt {
 /// OpenID realm config
 /// {@endtemplate}
 @MappableClass()
-class OpenId extends RealmConfig with OpenIdMappable {
+class OpenId extends DomainConfig with OpenIdMappable {
   /// {@macro open_config}
-  OpenId({
+  const OpenId({
     required super.realm,
     required this.issuerUrl,
     required this.clientId,
@@ -278,6 +280,7 @@ class OpenId extends RealmConfig with OpenIdMappable {
   @MappableField(key: 'acr-values', hook: AcrValuesHook())
   final String? acrValues;
 
+  @MappableField(hook: DomainTypeHook())
   @override
   RealmType get type => RealmType.openid;
 }

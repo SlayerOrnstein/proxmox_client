@@ -14,7 +14,7 @@ class ProxmoxClient {
     required InternetAddress host,
     int port = 8006,
     Client? client,
-  })  : baseUrl = Uri.parse('https://$host:$port/api2/json'),
+  })  : baseUrl = Uri.parse('https://${host.address}:$port/api2/json'),
         _client = ProxmoxHttpClient(token: token, client: client);
 
   /// Base url that all endpoints call to

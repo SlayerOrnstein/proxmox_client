@@ -6,3 +6,8 @@ extension ProxmoxBool on bool {
   ///  Turns a [bool] into an int bool
   int toInt() => this ? 1 : 0;
 }
+
+extension UriExtras on Uri {
+  /// Adds to path
+  Uri addPath(String path) => replace(path: '${this.path}/$path');
+}

@@ -9,6 +9,9 @@ class ProxmoxGroup extends ProxmoxEndpoint {
   /// {@macro groups}
   ProxmoxGroup({required super.baseUrl, required super.client});
 
+  @override
+  Uri get endpoint => baseUrl.addPath('groups');
+
   /// Fetch a list of currently configured groups
   Future<List<Group>> fetchGroups() async {
     final json = decodeJsonArray((await client.get(endpoint)).body);
@@ -44,7 +47,4 @@ class ProxmoxGroup extends ProxmoxEndpoint {
   Future<void> removeGroup(String id) async {
     await client.delete(endpoint.resolve(id));
   }
-
-  @override
-  Uri get endpoint => baseUrl.resolve('groups/');
 }
